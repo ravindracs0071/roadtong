@@ -8,25 +8,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var http_1 = require("@angular/http");
-var AppComponent = /** @class */ (function () {
-    function AppComponent(http) {
-        this.http = http;
+var core_1 = require('@angular/core');
+var app_data_service_1 = require("./app-data.service");
+var AppComponent = (function () {
+    function AppComponent(appDataService) {
+        this.appDataService = appDataService;
         //http get example
-        this.http.get('/test')
-            .subscribe(function (res) {
-            console.log(res);
-        });
+        // this.http.get('/test').subscribe((res) => { console.log(res); });
+        // this.appDataService.getLogs();
     }
     AppComponent = __decorate([
         core_1.Component({
-            selector: 'my-app',
-            template: 'Hello World!',
+            selector: 'app-root',
+            template: "\n    Root Componet: <br/>\n    <app-counter></app-counter>\n    ",
             providers: []
-        }),
-        __metadata("design:paramtypes", [http_1.Http])
+        }), 
+        __metadata('design:paramtypes', [app_data_service_1.AppDataService])
     ], AppComponent);
     return AppComponent;
 }());
