@@ -8,25 +8,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var app_data_service_1 = require("./app-data.service");
-var AppComponent = (function () {
-    function AppComponent(appDataService) {
-        this.appDataService = appDataService;
-        //http get example
-        // this.http.get('/test').subscribe((res) => { console.log(res); });
-        // this.appDataService.getLogs();
+var core_1 = require("@angular/core");
+var PortfolioComponent = (function () {
+    function PortfolioComponent() {
     }
-    AppComponent = __decorate([
+    PortfolioComponent = __decorate([
         core_1.Component({
-            selector: 'app-root',
-            templateUrl: 'app/app.component.html',
-            styleUrls: [],
-            providers: [app_data_service_1.AppDataService]
+            selector: 'app-portfolio',
+            template: "\n    <div class=\"well well-sm\">Portfolio</div>\n    "
         }), 
-        __metadata('design:paramtypes', [app_data_service_1.AppDataService])
-    ], AppComponent);
-    return AppComponent;
+        __metadata('design:paramtypes', [])
+    ], PortfolioComponent);
+    return PortfolioComponent;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.PortfolioComponent = PortfolioComponent;
+//# sourceMappingURL=portfolio.component.js.map

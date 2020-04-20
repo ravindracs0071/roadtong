@@ -8,25 +8,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var app_data_service_1 = require("./app-data.service");
-var AppComponent = (function () {
-    function AppComponent(appDataService) {
-        this.appDataService = appDataService;
-        //http get example
-        // this.http.get('/test').subscribe((res) => { console.log(res); });
-        // this.appDataService.getLogs();
+var core_1 = require("@angular/core");
+var AboutComponent = (function () {
+    function AboutComponent() {
     }
-    AppComponent = __decorate([
+    AboutComponent = __decorate([
         core_1.Component({
-            selector: 'app-root',
-            templateUrl: 'app/app.component.html',
-            styleUrls: [],
-            providers: [app_data_service_1.AppDataService]
+            selector: 'app-about',
+            template: "\n    <div class=\"well well-sm\">About Us</div>\n    <a routerLink=\"/about-us/author\" class=\"btn btn-info\" role=\"button\">Navigate</a>\n    <router-outlet></router-outlet>\n    "
         }), 
-        __metadata('design:paramtypes', [app_data_service_1.AppDataService])
-    ], AppComponent);
-    return AppComponent;
+        __metadata('design:paramtypes', [])
+    ], AboutComponent);
+    return AboutComponent;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.AboutComponent = AboutComponent;
+//# sourceMappingURL=about.component.js.map

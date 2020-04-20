@@ -3,11 +3,9 @@ import { Http } from '@angular/http';
 import { AppDataService } from "./app-data.service";
 @Component({
     selector: 'app-root',
-    template: `
-    Root Componet: <br/>
-    <app-counter></app-counter>
-    `,
-    providers: []
+    templateUrl: 'app/app.component.html',
+    styleUrls: [],
+    providers: [AppDataService]
 })
 export class AppComponent {
 

@@ -8,25 +8,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var app_data_service_1 = require("./app-data.service");
-var AppComponent = (function () {
-    function AppComponent(appDataService) {
-        this.appDataService = appDataService;
-        //http get example
-        // this.http.get('/test').subscribe((res) => { console.log(res); });
-        // this.appDataService.getLogs();
+var core_1 = require("@angular/core");
+var app_data_1 = require("./app.data");
+var AppFormComponent = (function () {
+    function AppFormComponent() {
+        this.model = new app_data_1.AppData();
+        this.tempData = [];
+        this.isSubmitted = false;
     }
-    AppComponent = __decorate([
+    AppFormComponent.prototype.onSubmit = function (e) {
+        e.preventDefault();
+        var logName = this.model.logName;
+        this.tempData.push(logName);
+    };
+    AppFormComponent = __decorate([
         core_1.Component({
-            selector: 'app-root',
-            templateUrl: 'app/app.component.html',
-            styleUrls: [],
-            providers: [app_data_service_1.AppDataService]
+            selector: 'app-form',
+            templateUrl: 'app/app-form.component.html'
         }), 
-        __metadata('design:paramtypes', [app_data_service_1.AppDataService])
-    ], AppComponent);
-    return AppComponent;
+        __metadata('design:paramtypes', [])
+    ], AppFormComponent);
+    return AppFormComponent;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.AppFormComponent = AppFormComponent;
+//# sourceMappingURL=app-form.component.js.map
