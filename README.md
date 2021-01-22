@@ -1,4 +1,130 @@
 # roadtong
+// src/app/auth/auth.service.ts
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class AuthService {
+  public getToken(): string {
+    return "dfsdfsdfsdfsdfsdfsdfsdfsdf";
+  }
+  public isAuthenticated(): boolean {
+    // get the token
+    const token = this.getToken();
+    // return a boolean reflecting 
+    // whether or not the token is expired
+    return tokenNotExpired(null, token);
+  }
+}
+
+Create an Interceptor
+import { Injectable } from '@angular/core';
+import {
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+  HttpInterceptor
+} from '@angular/common/http';
+import { AuthService } from './auth/auth.service';
+import { Observable } from 'rxjs/Observable';
+@Injectable()
+export class TokenInterceptor implements HttpInterceptor {
+  constructor(public auth: AuthService) {}
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    
+    request = request.clone({
+      setHeaders: {
+        Authorization: `Bearer ${this.auth.getToken()}`
+      }
+    });
+    return next.handle(request);
+  }
+}
+
+
+Add interceptor to provider 
+
+// src/app/app.module.ts
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './../auth/token.interceptor';
+@NgModule({
+  bootstrap: [AppComponent],
+  imports: [...],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ]
+})
+export class AppModule {}
+
+// src/app/ping/ping.component.ts
+import { HttpClient } from '@angular/common/http';
+// ...
+export class AppComponent {
+  constructor(public http: HttpClient) {}
+  public ping() {
+    this.http.get('https://example.com/api/things')
+      .subscribe(
+        data => console.log(data),
+        err => console.log(err)
+      );
+  }
+}
+
+// src/app/auth/jwt.interceptor.ts
+// ...
+import 'rxjs/add/operator/do';
+export class JwtInterceptor implements HttpInterceptor {
+  constructor(public auth: AuthService) {}
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    
+    return next.handle(request).do((event: HttpEvent<any>) => {
+      if (event instanceof HttpResponse) {
+        // do stuff with response if you want
+      }
+    }, (err: any) => {
+      if (err instanceof HttpErrorResponse) {
+        if (err.status === 401) {
+          // redirect to the login route
+          // or show a modal
+        }
+      }
+    });
+  }
+}
+
+// src/app/auth/auth.service.ts
+import { HttpRequest } from '@angular/common/http';
+// ...
+export class AuthService {
+cachedRequests: Array<HttpRequest<any>> = [];
+public collectFailedRequest(request): void {
+    this.cachedRequests.push(request);
+  }
+public retryFailedRequests(): void {
+    // retry the requests. this method can
+    // be called after the token is refreshed
+  }
+}
+
+// src/app/auth/jwt.interceptor.ts
+// ...
+intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {    
+  return next.handle(req).do((event: HttpEvent<any>) => {
+    if (event instanceof HttpResponse) {
+      // do stuff with response if you want
+    }
+  }, (err: any) => {
+    if (err instanceof HttpErrorResponse {
+      if (err.status === 401) {
+        this.auth.collectFailedRequest(request);
+      }
+    }
+  });
+}
+
 Starting from Angular 2 
 systemjs
 
